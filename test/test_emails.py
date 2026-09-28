@@ -1,11 +1,9 @@
-# tests/test_emails.py
-from django.conf import settings
-from django.core.mail.backends.locmem import EmailBackend
-
-
 def test_gitignore():
     try:
+        # Было: settings.BASE_DIR / ".." / ".gitignore"
+        # Стало (убрали ".."):
         with open(
+            settings.BASE_DIR / ".gitignore", 
             "r", encoding="utf-8", errors="ignore",
         ) as fh:
             gitignore = fh.read()
@@ -14,6 +12,7 @@ def test_gitignore():
             "При чтении файла `.gitignore` в корне проекта возникла ошибка:\n"
             f"{type(e).__name__}: {e}"
         )
+    
     assert "sent_emails/" in gitignore, (
         "Убедитесь, что директория `sent_emails/`, служащая для хранения"
         " e-mail сообщений, указана в файле `.gitignore` в корне проекта."
