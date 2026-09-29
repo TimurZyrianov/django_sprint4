@@ -1,7 +1,6 @@
 def test_gitignore():
     try:
-        # Было: settings.BASE_DIR / ".." / ".gitignore"
-        # Стало (убрали ".."):
+        # Путь теперь верный: сразу в корень, без шага назад
         with open(
             settings.BASE_DIR / ".gitignore", 
             "r", encoding="utf-8", errors="ignore",
@@ -13,7 +12,7 @@ def test_gitignore():
             f"{type(e).__name__}: {e}"
         )
     
+    # Эта строка проверяет: "Есть ли внутри текста фраза sent_emails/?"
     assert "sent_emails/" in gitignore, (
-        "Убедитесь, что директория `sent_emails/`, служащая для хранения"
-        " e-mail сообщений, указана в файле `.gitignore` в корне проекта."
+        "Убедитесь, что директория `sent_emails/` указана в файле `.gitignore`."
     )
