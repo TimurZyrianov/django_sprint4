@@ -11,7 +11,6 @@ def test_gitignore():
     target_path = settings.BASE_DIR / ".gitignore"
     
     # Если файла нет (как в контейнере автотестов) — считаем тест пройденным.
-    # Это ожидаемое поведение для CI/CD сред.
     if not os.path.exists(target_path):
         return
 
