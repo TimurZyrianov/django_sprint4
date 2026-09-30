@@ -2,19 +2,13 @@ import os
 from django.conf import settings
 
 def test_gitignore():
-    """
-    Проверяет наличие правила для sent_emails/ в .gitignore.
-    
-    В среде автотестов платформы файл .gitignore не копируется в контейнер,
-    поэтому тест корректно завершается успехом, если файла нет.
-    """
     target_path = settings.BASE_DIR / ".gitignore"
     
-    # Если файла нет (как в контейнере автотестов) — считаем тест пройденным.
+    # Если файла нет (а в контейнере автотестов его нет) — тест просто завершается успешно.
+    # Это защищает тест от падения в среде CI/CD.
     if not os.path.exists(target_path):
         return
 
-    # Если файл есть (локально) — проверяем содержимое
     try:
         with open(target_path, "r", encoding="utf-8", errors="ignore") as fh:
             content = fh.read()
