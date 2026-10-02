@@ -1,5 +1,7 @@
 import os
+
 from django.conf import settings
+
 
 def test_gitignore():
     target_path = settings.BASE_DIR / ".gitignore"
@@ -13,7 +15,7 @@ def test_gitignore():
     except Exception as e:
         raise AssertionError(f"Ошибка чтения файла: {e}")
 
-
     assert "sent_emails/" in content, (
-        "Убедитесь, что директория `sent_emails/` указана в файле `.gitignore`."
+        "Убедитесь, что директория `sent_emails/` "
+        "указана в файле `.gitignore`."
     )
